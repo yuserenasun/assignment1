@@ -6,8 +6,8 @@
 * Function: Login users.
 
 ### How to run it
-1. Run EmployeeApplication in one terminal.
-1. Under employeeApp folder, run `ng serve` in another terminal.
+1. Run LoginApplication in one terminal.
+1. Under my-app folder, run `ng serve` in another terminal.
 1. access https://localhost:4200 in your browser, input your username and password and click login.
 1. If you logged in successfully, you will se a welcome page, otherwise an error message.
 
