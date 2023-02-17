@@ -12,5 +12,6 @@
       <input type="password" [(ngModel)]="user.password" class="form-control" id="password" name="password">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   </form>
 </div>

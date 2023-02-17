@@ -45,6 +45,7 @@ public class UserService {
 
         // Check if the Base64 encoded password matches the record in the list of users
         String encodedPassword = Base64.encodeBase64String(inputUser.getPassword().getBytes());
+        System.out.println(encodedPassword + ", " + user.getPassword());
 
         if (!user.getPassword().equals(encodedPassword)) {
             return false;

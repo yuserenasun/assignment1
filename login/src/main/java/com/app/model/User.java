@@ -1,11 +1,13 @@
 package com.app.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 
 @Entity
 public class User {
-    @JsonProperty("userName")
+    @JsonProperty(value = "userName", required = true)
+    @JsonAlias(value = "username")
     private String username;
     private String password;
 

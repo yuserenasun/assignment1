@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/login")
 public class UserController {
@@ -19,13 +17,13 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping
-    public ResponseEntity<String> loginUser(@RequestBody User request) {
+    public ResponseEntity<User> loginUser(@RequestBody User request) {
+        System.out.println(request.toString());
         if(userService.validateUser(request)) {
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.status(HttpStatus.OK).body(request);
         }
-        System.out.println("Wrong password");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body("Invalid username or password");
+                .body(request);
     }
 }
 
