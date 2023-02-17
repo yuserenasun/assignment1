@@ -1,0 +1,27 @@
+{
+	"record":{
+		"user":[
+		{
+			"userName":"user1",
+			"password":"VXNlcjFAMTIzNA=="
+		},
+		{
+			"userName":"user2",
+			"password":"VXNlcjJAMTIzNA=="
+		},
+		{
+			"userName":"user3",
+			"password":"VXNlcjNAMTIzNA=="
+		},
+		{
+			"userName":"user4",
+			"password":"VXNlcjRAMTIzNA=="
+		},
+		{
+			"userName":"user5",
+			"password":"VXNlcjVAMTIzNA=="
+		}		
+		]
+	}
+}
+
