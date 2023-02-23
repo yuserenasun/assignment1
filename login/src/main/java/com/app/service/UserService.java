@@ -14,10 +14,11 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private List<User> users;
+    private final List<User> users;
+
     public UserService() {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             // Read the JSON file and extract the "user" array
             JsonNode rootNode = objectMapper.readTree(new File("src/main/resources/json/user.json"));
             JsonNode usersNode = rootNode.path("record").path("user");
@@ -25,7 +26,7 @@ public class UserService {
             // Convert the "user" array to a List<User>
             users = objectMapper.convertValue(usersNode, new TypeReference<List<User>>(){});
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error reading user data from file", e);
         }
     }
 
@@ -34,17 +35,22 @@ public class UserService {
     }
 
     public boolean validateUser(User inputUser) {
+        if (inputUser == null || inputUser.getUsername() == null || inputUser.getPassword() == null) {
+            throw new IllegalArgumentException("Invalid inputUser");
+        }
+
         User user = this.users.stream()
                 .filter(u -> u.getUsername().equals(inputUser.getUsername()))
                 .findFirst()
                 .orElse(null);
+
+        // User is not found
         if (user == null) {
             return false;
         }
 
         // Check if the Base64 encoded password matches the record in the list of users
         String encodedPassword = Base64.encodeBase64String(inputUser.getPassword().getBytes());
-        System.out.println(encodedPassword + ", " + user.getPassword());
 
         if (!user.getPassword().equals(encodedPassword)) {
             return false;

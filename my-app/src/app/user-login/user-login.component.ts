@@ -20,6 +20,11 @@ export class UserLoginComponent implements OnInit{
   }
 
   userLogin(){
+    // Check if user has entered a username and password
+    if (!this.user.username || !this.user.password) {
+      this.errorMessage = 'Please enter both username and password.';
+      return;
+    }
     // create an observer object to handle responses and errors
     const observer = {
       next: (response: any) => {
@@ -28,8 +33,11 @@ export class UserLoginComponent implements OnInit{
       },
       error: (error: any) => {
         // handle errors here
-        console.error('Login failed', error);
-        this.errorMessage = 'Invalid username or password';
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid username or password';
+        } else {
+          this.errorMessage = 'Something went wrong. Please try again later.';
+        }
       }
     };
 
